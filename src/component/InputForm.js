@@ -1,9 +1,13 @@
 import React, {useState} from 'react'
+import {addTodo} from "../redux_toolkit/TodoListSlice"
+import { useDispatch } from "react-redux"
 
 function InputForm(props){ 
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
     const [content, setContent] = useState("")
+
+    const dispatch = useDispatch()
 
     return(
         <div>
@@ -37,7 +41,7 @@ function InputForm(props){
                 <button 
                     type="button" 
                     onClick={()=>{
-                        props.addTodo({description,category, content})
+                        dispatch(addTodo({description,category, content}))
                         setDescription("")
                         setCategory("")
                         setContent("")
