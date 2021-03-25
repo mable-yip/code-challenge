@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { v1 as uuidv1 } from 'uuid'
 
 function InputForm(props){ 
     const [description, setDescription] = useState("")
@@ -37,7 +38,8 @@ function InputForm(props){
                 <button 
                     type="button" 
                     onClick={()=>{
-                        props.addTodo({description,category, content})
+                        const id = uuidv1();
+                        props.addTodo({id, description,category, content})
                         setDescription("")
                         setCategory("")
                         setContent("")

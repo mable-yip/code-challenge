@@ -1,4 +1,4 @@
-import react, {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
@@ -6,9 +6,9 @@ import {Redirect} from 'react-router-dom'
 function TodoItem(props){
     const {todoIndex} = useParams()
     const[redirect, setRedirect] = useState(false)
-    const allTodos = props.todoList
+    const todoItem = props.todoList[todoIndex]
+    console.log(todoItem)
 
-    console.log(allTodos[todoIndex])
 
     function renderRedirect(){
         if (redirect){
@@ -18,9 +18,9 @@ function TodoItem(props){
     
     return(
         <div>
-            <h3>Description: {allTodos[todoIndex].description}</h3>
-            <h3>Category: {allTodos[todoIndex].category}</h3>
-            <h3>Content: {allTodos[todoIndex].content} </h3>
+            <h3>Description: {todoItem['description']}</h3>
+            <h3>Category: {todoItem['category']}</h3>
+            <h3>Content: {todoItem['content']} </h3>
             {renderRedirect()}
             <button onClick={()=>setRedirect(true)}> Back </button>
         </div>
