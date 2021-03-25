@@ -1,4 +1,4 @@
-import { createAction, createReducer, configureStore} from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 import produce from 'immer'
 
 export const addTodo = createAction('add_todo')
@@ -12,8 +12,7 @@ const reducer = createReducer(initialTodoList, {
         draft[action.payload.id] = action.payload
     }),
     [deleteTodo]: produce((draft, action) => {delete draft[action.payload]}),
-    [deleteAllTodos]: produce((draft, action) => {action.payload.map(todo => delete draft[todo.id])})
+    [deleteAllTodos]: produce((draft, action) => {action.payload.map(todo => delete draft[todo.id])}) //don't know how to empty an object 
 })
 
-const store = configureStore({ reducer: reducer })
-export default store
+export default reducer
