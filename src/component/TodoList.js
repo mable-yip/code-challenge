@@ -1,13 +1,16 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { deleteAllTodos, deleteTodo } from '../redux'
 
-function TodoList(props){
-    console.log("~TodoList: ", props.allTodos)
-    const allTodoObj = Object.values(props.allTodos)
+function TodoList(){
+    const allTodos = useSelector(state => state)
+    const allTodoObj = Object.values(allTodos)
+    const dispatch = useDispatch()
     console.log(allTodoObj)
     return(
         <div>
-            <button onClick={() => props.deleteAllTodos(allTodoObj)}>Deleted selected</button>
+            <button onClick={() => dispatch(deleteAllTodos(allTodoObj))}>Deleted selected</button>
             <table>
                 <thead>
                     <tr>
@@ -26,7 +29,7 @@ function TodoList(props){
                                 </Link>
                             </td> 
                             <td>{todo.category}</td>
-                            <td onClick={()=>props.deleteTodo(todo.id)}>Delete</td>
+                            <td onClick={()=>dispatch(deleteTodo(todo.id))}>Delete</td>
                         </tr>)
                     }
                 </tbody>

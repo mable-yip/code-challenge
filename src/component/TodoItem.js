@@ -1,14 +1,13 @@
 import {useState} from 'react'
 import {useParams} from 'react-router-dom'
-import {connect} from 'react-redux'
+import { useSelector} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 
-function TodoItem(props){
+function TodoItem(){
     const {todoIndex} = useParams()
-    const[redirect, setRedirect] = useState(false)
-    const todoItem = props.todoList[todoIndex]
-    console.log(todoItem)
-
+    const[redirect, setRedirect] = useState(false)  
+    const todoItemList = useSelector(state => state)
+    const todoItem = todoItemList[todoIndex]
 
     function renderRedirect(){
         if (redirect){
@@ -27,4 +26,4 @@ function TodoItem(props){
     )
 }
 
-export default connect(state=>({todoList: state}),{})(TodoItem)
+export default TodoItem
