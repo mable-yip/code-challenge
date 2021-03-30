@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux'
 import { addTodo } from '../redux'
 
 function InputForm(){ 
-    const [description, setDescription] = useState("")
-    const [category, setCategory] = useState("")
-    const [content, setContent] = useState("")
+    const [description, setDescription] = useState<string>("")
+    const [category, setCategory] = useState<string>("")
+    const [content, setContent] = useState<string>("")
     const dispatch = useDispatch()
 
     return(
@@ -43,7 +43,10 @@ function InputForm(){
                     onClick={()=>{
                         const id = uuidv1();
                         console.log(id, description,category, content)
-                        dispatch(addTodo({id, description,category, content}))
+                        const todoItem = {
+                            id, description, category, content
+                        }
+                        dispatch(addTodo({id, todoItem}))
                         setDescription("")
                         setCategory("")
                         setContent("")

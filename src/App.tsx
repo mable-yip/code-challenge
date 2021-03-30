@@ -11,7 +11,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/todo"> <TodoPage /></Route>
-        <Route exact path="/todo/:todoIndex"> <TodoItem /></Route>
+        <Route exact path="/todo/:todoId"> <TodoItem /></Route>
         <Route exact path="/about"> <AboutPage /></Route>
       </Switch>
     </React.Fragment>
