@@ -1,11 +1,10 @@
-export interface ITodoItem {
-    id: string
+export interface TodoItem {
+    id : string 
     description: string
     category: string
     content: string
 }
 
-export interface ITodoItemObject {
-    id: string
-    todoItem: ITodoItem
-}
+export interface TodoItemList {
+    [id: string]: TodoItem
+ }

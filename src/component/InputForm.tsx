@@ -1,12 +1,10 @@
 import React, {useState} from 'react'
-import { v1 as uuidv1 } from 'uuid'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../redux'
+import { TodoItem } from '../interface/models'
 
-function InputForm(){ 
-    const [description, setDescription] = useState<string>("")
-    const [category, setCategory] = useState<string>("")
-    const [content, setContent] = useState<string>("")
+const InputForm = () => { 
+    const [todoItem, setTodoItem] = useState<TodoItem>({ id: "", description:"", category:"", content:""})
     const dispatch = useDispatch()
 
     return(
@@ -15,15 +13,21 @@ function InputForm(){
                 <h2>
                     Descirption: 
                     <input 
-                        value={description}
-                        onChange={e=>setDescription(e.target.value)}
+                        value={todoItem.description}
+                        onChange={(event: React.FormEvent<HTMLInputElement>) => {
+                            const newValue = event.currentTarget.value
+                            setTodoItem({...todoItem, description: newValue})
+                        }}
                     />
                 </h2>
                 <h2>
                     Category: 
                     <select 
-                        value={category}
-                        onChange={e=>setCategory(e.target.value)}
+                        value={todoItem.category}
+                        onChange={(event: React.FormEvent<HTMLSelectElement>) => {
+                            const newValue = event.currentTarget.value
+                            setTodoItem({...todoItem, category: newValue})
+                        }}
                     >
                         <option value="">  </option>
                         <option value="css"> css </option>
@@ -34,22 +38,18 @@ function InputForm(){
                 <h2>
                     Content: 
                     <textarea 
-                        value={content}
-                        onChange={e=>setContent(e.target.value)}
+                        value={todoItem.content}
+                        onChange={(event: React.FormEvent<HTMLTextAreaElement>) => {
+                            const newValue = event.currentTarget.value
+                            setTodoItem({...todoItem, content: newValue})
+                        }}
                     />
                 </h2>
                 <button 
                     type="button" 
                     onClick={()=>{
-                        const id = uuidv1();
-                        console.log(id, description,category, content)
-                        const todoItem = {
-                            id, description, category, content
-                        }
-                        dispatch(addTodo({id, todoItem}))
-                        setDescription("")
-                        setCategory("")
-                        setContent("")
+                        dispatch(addTodo(todoItem))
+                        setTodoItem({ id: "", description:"", category:"", content:""})
                     }}
                 >
                     Submit

@@ -1,18 +1,16 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { deleteAllTodos, deleteTodo } from '../redux'
+import { deleteTodo, deleteAllTodos } from '../redux'
 import { RootState } from '../redux/store'
-import { ITodoItem, ITodoItemObject } from '../interface/models'
+import { TodoItem } from '../interface/models'
 
-function TodoList(){
+const TodoList = () => {
     const allTodos = useSelector((state: RootState) => state)
-    const allTodoObj: ITodoItemObject[] = Object.values(allTodos)
+    const allTodoObj: TodoItem[] = Object.values(allTodos)
     const dispatch = useDispatch()
-    console.log(allTodoObj)
     return(
         <div>
-            <button onClick={() => dispatch(deleteAllTodos(allTodoObj))}>Deleted selected</button>
+            <button onClick={() => dispatch(deleteAllTodos(null))}>Deleted selected</button>
             <table>
                 <thead>
                     <tr>
@@ -27,10 +25,10 @@ function TodoList(){
                         <tr key={todo.id}>
                             <td>
                                 <Link to={`/todo/${todo.id}`}>
-                                    {todo.todoItem.description}
+                                    {todo.description}
                                 </Link>
                             </td> 
-                            <td>{todo.todoItem.category}</td>
+                            <td>{todo.category}</td>
                             <td onClick={()=>dispatch(deleteTodo(todo.id))}>Delete</td>
                         </tr>)
                     }

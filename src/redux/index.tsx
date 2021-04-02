@@ -1,19 +1,25 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
-import produce from 'immer'
-import { ITodoItem, ITodoItemObject} from '../interface/models'
+import { createAction, createReducer, PayloadAction} from '@reduxjs/toolkit'
+import { v1 as uuidv1 } from 'uuid'
+import { TodoItem, TodoItemList } from '../interface/models'
 
-export const addTodo = createAction<ITodoItemObject>('add_todo')
+export const addTodo = createAction<TodoItem>('add_todo')
 export const deleteTodo = createAction<string>('delete_todo')
-export const deleteAllTodos = createAction<ITodoItemObject[]>('delete_all_todo')
+export const deleteAllTodos = createAction<null>('delete_all_todo')
 
 const initialTodoList = {}
 
 const reducer = createReducer(initialTodoList, {
-    [addTodo.type]: produce((draft, action) => {
-        draft[action.payload.id] = action.payload
-    }),
-    [deleteTodo.type]: produce((draft, action) => {delete draft[action.payload]}),
-    [deleteAllTodos.type]: produce((draft, action) => {action.payload.map((todo: { id: string }) => delete draft[todo.id])}) //don't know how to empty an object 
+    [addTodo.type]:  (state: TodoItemList, action: PayloadAction<TodoItem>) => {
+        const id = uuidv1()
+        action.payload.id = id
+        state[id] = action.payload
+    },
+    [deleteTodo.type]: (state: TodoItemList, action: PayloadAction<string>) => {
+        delete state[action.payload]
+    },
+    [deleteAllTodos.type]: (state: TodoItemList) => {
+        Object.keys(state).forEach(key => { delete state[key] })
+    } 
 })
 
 export default reducer

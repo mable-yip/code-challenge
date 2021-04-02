@@ -1,18 +1,19 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import TodoPage from "./component/TodoPage"
 import AboutPage from "./component/AboutPage"
-import TodoItem from './component/TodoItem'
+import TodoItemDetail from './component/TodoItemDetail'
 import NavBar from "./Styling/NavBar"
 
-function App() {
+const App = () => {
   return (
     <React.Fragment> 
       <NavBar />
       <Switch>
         <Route exact path="/todo"> <TodoPage /></Route>
-        <Route exact path="/todo/:todoId"> <TodoItem /></Route>
+        <Route exact path="/todo/:todoId"> <TodoItemDetail /></Route>
         <Route exact path="/about"> <AboutPage /></Route>
+        <Route render={() => <Redirect to="/" />} />
       </Switch>
     </React.Fragment>
   );
