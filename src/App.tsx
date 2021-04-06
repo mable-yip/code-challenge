@@ -13,7 +13,7 @@ const App = () => {
         <Route exact path="/todo"> <TodoPage /></Route>
         <Route exact path="/todo/:todoId"> <TodoItemDetail /></Route>
         <Route exact path="/about"> <AboutPage /></Route>
-        <Route render={() => <Redirect to="/" />} />
+        <Redirect to="/" />
       </Switch>
     </React.Fragment>
   );

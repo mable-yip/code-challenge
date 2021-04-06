@@ -10,7 +10,7 @@ const TodoList = () => {
     const dispatch = useDispatch()
     return(
         <div>
-            <button onClick={() => dispatch(deleteAllTodos(null))}>Deleted selected</button>
+            <button onClick={() => dispatch(deleteAllTodos())}>Deleted selected</button>
             <table>
                 <thead>
                     <tr>

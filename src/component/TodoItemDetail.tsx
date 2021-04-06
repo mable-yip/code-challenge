@@ -1,5 +1,5 @@
 import { useParams, Redirect, useHistory } from 'react-router-dom'
-import { useSelector} from 'react-redux'
+import { shallowEqual, useSelector} from 'react-redux'
 import { TodoItemList} from '../interface/models'
 
 interface ParamTypes {
@@ -9,7 +9,7 @@ interface ParamTypes {
 const TodoItemDetail = () => {
     let history = useHistory();
     const { todoId } = useParams<ParamTypes>()
-    const todoItem = useSelector((state: TodoItemList) => state[todoId])    
+    const { description, category, content} = useSelector((state: TodoItemList) => state[todoId], shallowEqual)    
 
     const handleClick = () => {
         history.push("/todo");
@@ -17,9 +17,9 @@ const TodoItemDetail = () => {
     
     return(
         <div>
-            <h3>Description: {todoItem['description']}</h3>
-            <h3>Category: {todoItem['category']}</h3>
-            <h3>Content: {todoItem['content']} </h3>
+            <h3>Description: {description}</h3>
+            <h3>Category: {category}</h3>
+            <h3>Content: {content} </h3>
             <button onClick={handleClick}> Back </button>
         </div>
     )

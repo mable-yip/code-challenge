@@ -8,3 +8,5 @@ export interface TodoItem {
 export interface TodoItemList {
     [id: string]: TodoItem
  }
+
+ export type TodoItemPreview = Omit<TodoItem, "id">
