@@ -1,9 +1,13 @@
 import React, {useState} from 'react'
+import { v1 as uuidv1 } from 'uuid'
+import { useDispatch } from 'react-redux'
+import { addTodo } from '../redux'
 
-function InputForm(props){ 
+function InputForm(){ 
     const [description, setDescription] = useState("")
     const [category, setCategory] = useState("")
     const [content, setContent] = useState("")
+    const dispatch = useDispatch()
 
     return(
         <div>
@@ -37,7 +41,9 @@ function InputForm(props){
                 <button 
                     type="button" 
                     onClick={()=>{
-                        props.addTodo({description,category, content})
+                        const id = uuidv1();
+                        console.log(id, description,category, content)
+                        dispatch(addTodo({id, description,category, content}))
                         setDescription("")
                         setCategory("")
                         setContent("")
