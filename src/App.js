@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, Switch, Route} from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import TodoPage from "./component/TodoPage"
 import AboutPage from "./component/AboutPage"
 import TodoItem from './component/TodoItem'
